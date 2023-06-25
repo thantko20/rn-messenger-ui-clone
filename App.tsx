@@ -1,13 +1,5 @@
-import { ThemeProvider } from '@shopify/restyle';
-import theme from './src/theme';
-import { Box, Text } from './src/atoms';
+import Providers from './src/providers';
 
 export default function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <Box flex={1} alignItems="center" justifyContent="center">
-        <Text>Hello World</Text>
-      </Box>
-    </ThemeProvider>
-  );
+  return <Providers />;
 }
