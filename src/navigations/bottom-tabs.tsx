@@ -1,54 +1,66 @@
 import { useTheme } from '@shopify/restyle';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { useTheme as usePaperTheme } from 'react-native-paper';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 import { Theme } from '../theme';
-import {
-  CallsStackScreen,
-  ChatsStackScreen,
-  PeopleStackScreen,
-} from './stacks';
+import { Chats, Calls, People } from '../screens';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { HomeBottomTabsParamList } from './types';
+import { Box } from '../atoms';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator<HomeBottomTabsParamList>();
 
 const BottomTabs = () => {
   const theme = useTheme<Theme>();
   const { colors } = theme;
 
-  const paperTheme = usePaperTheme();
-
-  paperTheme.colors.secondaryContainer = 'transparent';
-
   return (
-    <Tab.Navigator initialRouteName="ChatsTab" activeColor={colors.blue}>
+    <Tab.Navigator
+      initialRouteName="Chats"
+      screenOptions={{
+        tabBarActiveTintColor: colors.blue,
+        tabBarStyle: {
+          backgroundColor: colors.white,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: -1,
+          },
+          shadowOpacity: 0.18,
+          shadowRadius: 1,
+          elevation: 1,
+        },
+      }}
+      sceneContainerStyle={{
+        backgroundColor: colors.white,
+        paddingHorizontal: 14,
+      }}
+    >
       <Tab.Screen
-        name="ChatsTab"
-        component={ChatsStackScreen}
+        name="Chats"
+        component={Chats}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="ios-chatbubbles" color={color} size={28} />
+            <Ionicons name="ios-chatbubbles" color={color} size={28} />
           ),
           tabBarLabel: 'Chats',
         }}
       />
       <Tab.Screen
-        name="CallsTab"
-        component={CallsStackScreen}
+        name="Calls"
+        component={Calls}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="ios-videocam" color={color} size={28} />
+            <Ionicons name="ios-videocam" color={color} size={28} />
           ),
           tabBarLabel: 'Calls',
         }}
       />
       <Tab.Screen
-        name="PeopleTab"
-        component={PeopleStackScreen}
+        name="People"
+        component={People}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialIcon name="people" color={color} size={28} />
+            <MaterialIcons name="people" color={color} size={28} />
           ),
           tabBarLabel: 'People',
         }}

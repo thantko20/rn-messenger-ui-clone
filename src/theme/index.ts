@@ -28,13 +28,16 @@ const theme = createTheme({
     black: palette.black,
     blue: palette.blue400,
     green: palette.green500,
+    gray: palette.gray400,
 
     $background: palette.white,
     $foreground: palette.black,
     $primary: palette.blue400,
     $primaryForeground: palette.white,
     $primaryRipple: palette.blue500,
-    $activityIndicator: palette.green500,
+    $onlineIndicator: palette.green500,
+    $addStory: palette.gray200,
+    $textMuted: palette.gray400,
   },
 
   spacing: {
