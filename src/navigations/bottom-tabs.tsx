@@ -22,9 +22,9 @@ const BottomTabs = () => {
   paperTheme.colors.secondaryContainer = 'transparent';
 
   return (
-    <Tab.Navigator initialRouteName="Chats" activeColor={colors.blue}>
+    <Tab.Navigator initialRouteName="ChatsTab" activeColor={colors.blue}>
       <Tab.Screen
-        name="Chats Tab"
+        name="ChatsTab"
         component={ChatsStackScreen}
         options={{
           tabBarIcon: ({ color }) => (
@@ -34,7 +34,7 @@ const BottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Calls Tab"
+        name="CallsTab"
         component={CallsStackScreen}
         options={{
           tabBarIcon: ({ color }) => (
@@ -44,7 +44,7 @@ const BottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name="People Tab"
+        name="PeopleTab"
         component={PeopleStackScreen}
         options={{
           tabBarIcon: ({ color }) => (

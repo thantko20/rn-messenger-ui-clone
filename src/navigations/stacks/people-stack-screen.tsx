@@ -1,7 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { People } from '../../screens';
+import { PeopleStackParamList } from './types';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<PeopleStackParamList>();
 
 const PeopleStackScreen = () => {
   return (

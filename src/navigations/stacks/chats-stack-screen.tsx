@@ -1,7 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { Chats } from '../../screens';
+import { ChatStackParamList } from './types';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<ChatStackParamList>();
 
 const ChatsStackScreen = () => {
   return (

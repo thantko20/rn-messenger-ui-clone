@@ -1,7 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { Calls } from '../../screens';
+import { CallStackParamList } from './types';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<CallStackParamList>();
 
 const CallsStackScreen = () => {
   return (
