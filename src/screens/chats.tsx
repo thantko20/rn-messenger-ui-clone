@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { Box, Text } from '../atoms';
+import { Box } from '../atoms';
 import SearchBox from '../components/search-box';
 import Stories from '../components/stories';
-import { FlatList, Image } from 'react-native';
-import { useTheme } from '@shopify/restyle';
-import { Theme } from '../theme';
+import { FlatList } from 'react-native';
+import { User } from '../types/users.types';
+import { Conversation } from '../types/conversation';
+import ConversationCard from '../components/conversation-card';
+import { NavigationProp } from '@react-navigation/native';
 
-const stories = [
+const stories: User[] = [
   { name: 'Emile', avatar: '../../assets/avatar.jpg' },
   { name: 'Emile', avatar: '../../assets/avatar.jpg' },
   { name: 'Emile', avatar: '../../assets/avatar.jpg' },
@@ -16,7 +18,7 @@ const stories = [
   { name: 'Emile', avatar: '../../assets/avatar.jpg' },
 ];
 
-const conversations = [
+const conversations: Conversation[] = [
   {
     name: 'Martin Randolph',
     avatar: '../../assets/avatar.jpg',
@@ -52,43 +54,17 @@ const conversations = [
 const Chats = () => {
   const [search, setSearch] = useState('');
 
-  const { borderRadii, spacing } = useTheme<Theme>();
-
   return (
     <Box flex={1}>
-      <SearchBox value={search} onChangeText={setSearch} />
-      <Stories stories={stories} />
+      <Box paddingHorizontal={'md'}>
+        <SearchBox value={search} onChangeText={setSearch} />
+        <Stories stories={stories} />
+      </Box>
       <FlatList
-        contentContainerStyle={{ gap: spacing.lg, justifyContent: 'center' }}
+        contentContainerStyle={{ justifyContent: 'center' }}
         data={conversations}
-        renderItem={({ item, index }) => {
-          return (
-            <Box flexDirection="row" gap="md" alignItems="center">
-              <Image
-                source={require('../../assets/avatar.jpg')}
-                style={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: borderRadii.full,
-                }}
-              />
-              <Box gap={'xs'}>
-                <Text fontSize={18} fontWeight="700">
-                  {item.name}
-                </Text>
-                <Text
-                  fontSize={14}
-                  fontWeight="700"
-                  color="$textMuted"
-                  style={{ maxWidth: 180 }}
-                  numberOfLines={1}
-                >
-                  {item.sendByUser && 'You: '}
-                  {item.lastMessage}
-                </Text>
-              </Box>
-            </Box>
-          );
+        renderItem={({ item }) => {
+          return <ConversationCard key={item.name} conversation={item} />;
         }}
       />
     </Box>

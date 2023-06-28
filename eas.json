@@ -4,14 +4,14 @@
   },
   "build": {
     "development": {
-      "developmentClient": false,
+      "developmentClient": true,
       "distribution": "internal",
       "env": {
         "ANDROID_HOME": "/home/marco/Android/Sdk"
-      },
-      "android": {
-        "buildType": "apk"
       }
+      // "android": {
+      //   "buildType": "apk"
+      // }
     },
     "preview": {
       "distribution": "internal"

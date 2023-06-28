@@ -32,7 +32,6 @@ const BottomTabs = () => {
       }}
       sceneContainerStyle={{
         backgroundColor: colors.white,
-        paddingHorizontal: 14,
       }}
     >
       <Tab.Screen

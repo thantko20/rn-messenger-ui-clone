@@ -38,6 +38,7 @@ const theme = createTheme({
     $onlineIndicator: palette.green500,
     $addStory: palette.gray200,
     $textMuted: palette.gray400,
+    $lightestGray: palette.gray100,
   },
 
   spacing: {
