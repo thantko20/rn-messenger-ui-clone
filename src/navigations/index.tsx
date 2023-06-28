@@ -1,27 +1,21 @@
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabs from './bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Box, Text } from '../atoms';
+import { Conversation } from '../screens';
+import { RootStackParamList } from '../types/navigations';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const Navigations = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Root">
         <Stack.Screen
           options={{ headerShown: false }}
           name="Root"
           component={BottomTabs}
         />
-        <Stack.Screen
-          name="ChatDetail"
-          component={() => (
-            <Box>
-              <Text>Chat Detail</Text>
-            </Box>
-          )}
-        />
+        <Stack.Screen name="Conversation" component={Conversation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -2,12 +2,14 @@ import { Image } from 'react-native';
 import { Box, Pressable, Text } from '../atoms';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
-import { Conversation } from '../types/conversation';
+import { Conversation } from '../types/conversation.types';
 import { useNavigation } from '@react-navigation/native';
+import { RootBottomTabScreenProps } from '../types/navigations/bottom-tabs.types';
 
 const ConversationCard = ({ conversation }: { conversation: Conversation }) => {
   const { borderRadii } = useTheme<Theme>();
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<RootBottomTabScreenProps<'Chats'>['navigation']>();
 
   return (
     <Pressable
@@ -15,7 +17,7 @@ const ConversationCard = ({ conversation }: { conversation: Conversation }) => {
       gap="sm"
       alignItems="center"
       onPress={() => {
-        navigation.navigate('ChatDetail');
+        navigation.navigate('Conversation', { username: conversation.name });
       }}
       paddingHorizontal="md"
       paddingVertical="sm"

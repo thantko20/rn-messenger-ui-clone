@@ -4,9 +4,8 @@ import SearchBox from '../components/search-box';
 import Stories from '../components/stories';
 import { FlatList } from 'react-native';
 import { User } from '../types/users.types';
-import { Conversation } from '../types/conversation';
+import { Conversation } from '../types/conversation.types';
 import ConversationCard from '../components/conversation-card';
-import { NavigationProp } from '@react-navigation/native';
 
 const stories: User[] = [
   { name: 'Emile', avatar: '../../assets/avatar.jpg' },
