@@ -1,12 +1,21 @@
 import { Image } from 'react-native';
-import { Box, Text } from '../atoms';
+import { Box, Text, Pressable } from '../atoms';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
+import { useNavigation } from '@react-navigation/native';
+import { RootBottomTabScreenProps } from '../types/navigations/bottom-tabs.types';
 
 const Story = ({ name }: { name: string }) => {
   const { borderRadii } = useTheme<Theme>();
+  const navigation =
+    useNavigation<RootBottomTabScreenProps<'Chats'>['navigation']>();
+
   return (
-    <Box gap="sm" alignItems="center">
+    <Pressable
+      gap="sm"
+      alignItems="center"
+      onPress={() => navigation.navigate('Conversation', { username: name })}
+    >
       <Box
         width={52}
         height={52}
@@ -37,7 +46,7 @@ const Story = ({ name }: { name: string }) => {
       <Text fontSize={12} numberOfLines={1} ellipsizeMode="tail">
         {name}
       </Text>
-    </Box>
+    </Pressable>
   );
 };
 

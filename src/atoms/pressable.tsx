@@ -30,18 +30,20 @@ const restyleFunctions = composeRestyleFunctions<Theme, RestyleProps>([
 export type Props = RestyleProps & {
   onPress: () => void;
   children: ReactNode;
-  rippleColor?: string;
+  rippleColor?: keyof Theme['colors'];
 };
 
-const Pressable = ({ onPress, children, ...rest }: Props) => {
+const Pressable = ({ onPress, children, rippleColor, ...rest }: Props) => {
+  const props = useRestyle(restyleFunctions, rest);
   const { colors } = useTheme<Theme>();
-  const { rippleColor = colors.$lightestGray, ...props } = useRestyle(
-    restyleFunctions,
-    rest,
-  );
 
   return (
-    <NativePressable onPress={onPress} android_ripple={{ color: rippleColor }}>
+    <NativePressable
+      onPress={onPress}
+      android_ripple={{
+        color: rippleColor && colors[rippleColor],
+      }}
+    >
       <Box {...props}>{children}</Box>
     </NativePressable>
   );

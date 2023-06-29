@@ -4,9 +4,9 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Theme } from '../theme';
 import { Chats, Calls, People } from '../screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { RootBottomTabsParamList } from './types';
+import { RootBottomTabParamList } from '../types/navigations/bottom-tabs.types';
 
-const Tab = createBottomTabNavigator<RootBottomTabsParamList>();
+const Tab = createBottomTabNavigator<RootBottomTabParamList>();
 
 const BottomTabs = () => {
   const theme = useTheme<Theme>();

@@ -17,10 +17,14 @@ const ConversationCard = ({ conversation }: { conversation: Conversation }) => {
       gap="sm"
       alignItems="center"
       onPress={() => {
-        navigation.navigate('Conversation', { username: conversation.name });
+        navigation.navigate('Conversation', {
+          username: conversation.name,
+          avatar: conversation.avatar,
+        });
       }}
       paddingHorizontal="md"
       paddingVertical="sm"
+      rippleColor="$lightestGray"
     >
       <Image
         source={require('../../assets/avatar.jpg')}

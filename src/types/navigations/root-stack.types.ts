@@ -9,6 +9,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootBottomTabParamList>;
   Conversation: {
     username: string;
+    avatar: string;
   };
 };
 
