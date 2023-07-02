@@ -4,7 +4,7 @@ import { RootStackScreenProps } from '../types/navigations';
 import { useEffect, useState } from 'react';
 import { loremIpsum } from 'lorem-ipsum';
 import { ConversationBottomBox } from '../components';
-import MessageCard from '../components/message';
+import MessageCard from '../components/message-card';
 
 const generateRandomText = () =>
   loremIpsum({
