@@ -1,9 +1,10 @@
 import { FlatList } from 'react-native';
-import { Box, Text } from '../atoms';
+import { Box } from '../atoms';
 import { RootStackScreenProps } from '../types/navigations';
 import { useEffect, useState } from 'react';
 import { loremIpsum } from 'lorem-ipsum';
 import { ConversationBottomBox } from '../components';
+import MessageCard from '../components/message';
 
 const generateRandomText = () =>
   loremIpsum({
@@ -33,17 +34,20 @@ const Conversation = ({
       <Box flex={1}>
         <FlatList
           contentContainerStyle={{
-            gap: 4,
+            gap: 12,
+            padding: 8,
+          }}
+          style={{
+            // this is used instead of `inverted` prop
+            // due to horrible laggy performance
+            // renderItem also needs to be applied this style
+            // to accomodate FlatList parent
+            transform: [{ scaleY: -1 }, { scaleX: -1 }],
           }}
           data={messages}
-          renderItem={({ item, index }) => (
-            <Box
-              key={index}
-              backgroundColor={item.sentByMe ? '$primary' : '$lightestGray'}
-            >
-              <Text>{item.text}</Text>
-            </Box>
-          )}
+          renderItem={({ item }) => {
+            return <MessageCard message={item} key={item.text} />;
+          }}
         />
       </Box>
       <ConversationBottomBox />

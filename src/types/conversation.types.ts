@@ -4,3 +4,8 @@ export type Conversation = {
   sendByUser: boolean;
   lastMessage: string;
 };
+
+export type Message = {
+  text: string;
+  sentByMe: boolean;
+};
