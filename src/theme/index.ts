@@ -39,6 +39,8 @@ const theme = createTheme({
     $addStory: palette.gray200,
     $textMuted: palette.gray400,
     $lightestGray: palette.gray100,
+    $otherMessageBackground: palette.gray200,
+    $otherMessageForeground: palette.gray900,
   },
 
   spacing: {

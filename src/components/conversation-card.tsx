@@ -25,8 +25,8 @@ const ConversationCard = ({ conversation }: { conversation: Conversation }) => {
       alignItems="center"
       onPress={() => {
         navigation.navigate('Conversation', {
-          username: user.name,
-          avatar: user.avatar,
+          user,
+          id: conversation.id,
         });
       }}
       paddingHorizontal="md"

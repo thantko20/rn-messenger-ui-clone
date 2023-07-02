@@ -5,9 +5,14 @@ import { Theme } from '../theme';
 import { useNavigation } from '@react-navigation/native';
 import { RootBottomTabScreenProps } from '../types/navigations/bottom-tabs.types';
 import { User } from '../types/users.types';
+import { useAtomValue } from 'jotai';
+import { conversationsAtom } from '../store';
 
 const Story = ({ story }: { story: User }) => {
-  const { name, avatar, isOnline } = story;
+  const { name, avatar } = story;
+  const { id: conversationId } = useAtomValue(conversationsAtom).find(
+    (conversation) => conversation.user.id === story.id,
+  )!;
   const { borderRadii } = useTheme<Theme>();
   const navigation =
     useNavigation<RootBottomTabScreenProps<'Chats'>['navigation']>();
@@ -17,7 +22,7 @@ const Story = ({ story }: { story: User }) => {
       gap="sm"
       alignItems="center"
       onPress={() =>
-        navigation.navigate('Conversation', { username: name, avatar })
+        navigation.navigate('Conversation', { user: story, id: conversationId })
       }
     >
       <Box

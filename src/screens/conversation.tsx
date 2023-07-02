@@ -11,11 +11,13 @@ const Conversation = ({
   route,
   navigation,
 }: RootStackScreenProps<'Conversation'>) => {
-  const messages = useAtomValue(messagesAtom);
-  const { username } = route.params;
+  const { user, id } = route.params;
+  const messages = useAtomValue(messagesAtom).filter(
+    (msg) => msg.conversationId === id,
+  );
 
   useEffect(() => {
-    navigation.setOptions({ headerTitle: username });
+    navigation.setOptions({ headerTitle: user.name });
   }, []);
 
   return (
@@ -43,6 +45,7 @@ const Conversation = ({
               />
             );
           }}
+          keyExtractor={({ id }) => id.toString()}
         />
       </Box>
       <ConversationBottomBox />

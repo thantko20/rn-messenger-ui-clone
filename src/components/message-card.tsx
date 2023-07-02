@@ -15,7 +15,7 @@ const MessageCard = ({
 
   return (
     <Box
-      backgroundColor={sentByMe ? '$primary' : '$lightestGray'}
+      backgroundColor={sentByMe ? '$primary' : '$otherMessageBackground'}
       maxWidth={'75%'}
       alignSelf={sentByMe ? 'flex-start' : 'flex-end'}
       padding={'sm'}
@@ -25,7 +25,9 @@ const MessageCard = ({
         marginTop: message.sentBy.id === prevMessage?.sentBy.id ? -10 : 0,
       }}
     >
-      <Text color={sentByMe ? 'white' : '$foreground'}>{message.text}</Text>
+      <Text color={sentByMe ? 'white' : '$otherMessageForeground'}>
+        {message.text + ' ' + message.id}
+      </Text>
     </Box>
   );
 };

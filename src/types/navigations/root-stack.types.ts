@@ -4,12 +4,13 @@ import {
 } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootBottomTabParamList } from './bottom-tabs.types';
+import { User } from '../users.types';
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootBottomTabParamList>;
   Conversation: {
-    username: string;
-    avatar: string;
+    user: User;
+    id: number;
   };
 };
 
