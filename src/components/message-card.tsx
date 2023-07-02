@@ -26,7 +26,7 @@ const MessageCard = ({
       }}
     >
       <Text color={sentByMe ? 'white' : '$otherMessageForeground'}>
-        {message.text + ' ' + message.id}
+        {message.text}
       </Text>
     </Box>
   );
