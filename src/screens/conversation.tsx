@@ -45,8 +45,14 @@ const Conversation = ({
             transform: [{ scaleY: -1 }, { scaleX: -1 }],
           }}
           data={messages}
-          renderItem={({ item }) => {
-            return <MessageCard message={item} key={item.text} />;
+          renderItem={({ item, index }) => {
+            return (
+              <MessageCard
+                message={item}
+                prevMessage={messages[index - 1]}
+                key={item.text}
+              />
+            );
           }}
         />
       </Box>

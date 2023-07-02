@@ -1,7 +1,13 @@
 import { Box, Text } from '../atoms';
 import { Message } from '../types/conversation.types';
 
-const MessageCard = ({ message }: { message: Message }) => {
+const MessageCard = ({
+  message,
+  prevMessage,
+}: {
+  message: Message;
+  prevMessage?: Message;
+}) => {
   return (
     <Box
       backgroundColor={message.sentByMe ? '$primary' : '$lightestGray'}
@@ -9,7 +15,10 @@ const MessageCard = ({ message }: { message: Message }) => {
       alignSelf={message.sentByMe ? 'flex-start' : 'flex-end'}
       padding={'sm'}
       borderRadius="sm"
-      style={{ transform: [{ scaleY: -1 }, { scaleX: -1 }] }}
+      style={{
+        transform: [{ scaleY: -1 }, { scaleX: -1 }],
+        marginTop: message.sentByMe === prevMessage?.sentByMe ? -10 : 0,
+      }}
     >
       <Text color={message.sentByMe ? 'white' : '$foreground'}>
         {message.text}
