@@ -2,12 +2,12 @@ import { FlatList } from 'react-native';
 import { Box, Text } from '../atoms';
 import { AntDesign } from '@expo/vector-icons';
 import Story from './story';
+import { useAtomValue } from 'jotai';
+import { usersAtom } from '../store';
 
-const Stories = ({
-  stories,
-}: {
-  stories: { name: string; avatar: string }[];
-}) => {
+const Stories = () => {
+  const users = useAtomValue(usersAtom);
+
   return (
     <Box flexDirection="row" gap="md" paddingVertical={'xl'} overflow="scroll">
       <Box gap="sm" alignItems="center">
@@ -29,8 +29,8 @@ const Stories = ({
           flexDirection: 'row',
           gap: 24,
         }}
-        data={stories}
-        renderItem={({ item }) => <Story {...item} />}
+        data={users}
+        renderItem={({ item }) => <Story story={item} />}
       />
     </Box>
   );

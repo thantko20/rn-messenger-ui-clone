@@ -4,8 +4,10 @@ import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
 import { useNavigation } from '@react-navigation/native';
 import { RootBottomTabScreenProps } from '../types/navigations/bottom-tabs.types';
+import { User } from '../types/users.types';
 
-const Story = ({ name }: { name: string }) => {
+const Story = ({ story }: { story: User }) => {
+  const { name, avatar, isOnline } = story;
   const { borderRadii } = useTheme<Theme>();
   const navigation =
     useNavigation<RootBottomTabScreenProps<'Chats'>['navigation']>();
@@ -14,7 +16,9 @@ const Story = ({ name }: { name: string }) => {
     <Pressable
       gap="sm"
       alignItems="center"
-      onPress={() => navigation.navigate('Conversation', { username: name })}
+      onPress={() =>
+        navigation.navigate('Conversation', { username: name, avatar })
+      }
     >
       <Box
         width={52}
@@ -24,7 +28,7 @@ const Story = ({ name }: { name: string }) => {
         position="relative"
       >
         <Image
-          source={require('../../assets/avatar.jpg')}
+          source={avatar}
           style={{
             width: '100%',
             height: '100%',

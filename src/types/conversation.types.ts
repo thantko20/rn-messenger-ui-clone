@@ -1,11 +1,13 @@
+import { User } from './users.types';
+
 export type Conversation = {
-  name: string;
-  avatar: string;
-  sendByUser: boolean;
-  lastMessage: string;
+  id: number;
+  user: User;
 };
 
 export type Message = {
+  id: number;
   text: string;
-  sentByMe: boolean;
+  sentBy: User;
+  conversationId: number;
 };

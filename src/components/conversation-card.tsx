@@ -5,8 +5,15 @@ import { Theme } from '../theme';
 import { Conversation } from '../types/conversation.types';
 import { useNavigation } from '@react-navigation/native';
 import { RootBottomTabScreenProps } from '../types/navigations/bottom-tabs.types';
+import { useAtomValue } from 'jotai';
+import { messagesAtom } from '../store';
 
 const ConversationCard = ({ conversation }: { conversation: Conversation }) => {
+  const { user } = conversation;
+  const lastMessage = useAtomValue(messagesAtom).filter(
+    (m) => m.conversationId === conversation.id,
+  )[0];
+
   const { borderRadii } = useTheme<Theme>();
   const navigation =
     useNavigation<RootBottomTabScreenProps<'Chats'>['navigation']>();
@@ -18,8 +25,8 @@ const ConversationCard = ({ conversation }: { conversation: Conversation }) => {
       alignItems="center"
       onPress={() => {
         navigation.navigate('Conversation', {
-          username: conversation.name,
-          avatar: conversation.avatar,
+          username: user.name,
+          avatar: user.avatar,
         });
       }}
       paddingHorizontal="md"
@@ -27,7 +34,7 @@ const ConversationCard = ({ conversation }: { conversation: Conversation }) => {
       rippleColor="$lightestGray"
     >
       <Image
-        source={require('../../assets/avatar.jpg')}
+        source={user.avatar}
         style={{
           width: 60,
           height: 60,
@@ -36,7 +43,7 @@ const ConversationCard = ({ conversation }: { conversation: Conversation }) => {
       />
       <Box gap={'xs'}>
         <Text fontSize={18} fontWeight="700">
-          {conversation.name}
+          {user.name}
         </Text>
         <Text
           fontSize={14}
@@ -45,8 +52,8 @@ const ConversationCard = ({ conversation }: { conversation: Conversation }) => {
           style={{ maxWidth: 180 }}
           numberOfLines={1}
         >
-          {conversation.sendByUser && 'You: '}
-          {conversation.lastMessage}
+          {lastMessage.sentBy.id && 'You: '}
+          {lastMessage.text}
         </Text>
       </Box>
     </Pressable>
