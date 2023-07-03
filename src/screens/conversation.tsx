@@ -1,11 +1,17 @@
 import { FlatList } from 'react-native';
-import { Box } from '../atoms';
+import { AnimatedBox, Box } from '../atoms';
 import { RootStackScreenProps } from '../types/navigations';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ConversationBottomBox } from '../components';
 import MessageCard from '../components/message-card';
 import { useAtom, useAtomValue } from 'jotai';
 import { messagesAtom, userAtom } from '../store';
+import Animated, {
+  FadeIn,
+  Layout,
+  SlideInDown,
+  ZoomIn,
+} from 'react-native-reanimated';
 
 const Conversation = ({
   route,
@@ -51,11 +57,13 @@ const Conversation = ({
           data={messages}
           renderItem={({ item, index }) => {
             return (
-              <MessageCard
-                message={item}
-                prevMessage={messages[index - 1]}
-                key={item.text}
-              />
+              <AnimatedBox entering={ZoomIn} layout={Layout}>
+                <MessageCard
+                  message={item}
+                  prevMessage={messages[index - 1]}
+                  key={item.text}
+                />
+              </AnimatedBox>
             );
           }}
           keyExtractor={({ id }) => id.toString()}

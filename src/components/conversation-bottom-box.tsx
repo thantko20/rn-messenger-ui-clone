@@ -5,8 +5,6 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { Theme } from '../theme';
-import { useAtom } from 'jotai';
-import { messagesAtom } from '../store';
 
 const ConversationBottomBox = ({
   sendMessage,
@@ -119,7 +117,12 @@ const ConversationBottomBox = ({
         </Pressable>
       </AnimatedBox>
       {message ? (
-        <IconButton onPress={() => sendMessage(message)}>
+        <IconButton
+          onPress={() => {
+            sendMessage(message);
+            setMessage('');
+          }}
+        >
           <Ionicons name="send" size={24} color={colors.$primary} />
         </IconButton>
       ) : (
