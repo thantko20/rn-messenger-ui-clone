@@ -4,17 +4,30 @@ import { RootStackScreenProps } from '../types/navigations';
 import { useEffect, useState } from 'react';
 import { ConversationBottomBox } from '../components';
 import MessageCard from '../components/message-card';
-import { useAtomValue } from 'jotai';
-import { messagesAtom } from '../store';
+import { useAtom, useAtomValue } from 'jotai';
+import { messagesAtom, userAtom } from '../store';
 
 const Conversation = ({
   route,
   navigation,
 }: RootStackScreenProps<'Conversation'>) => {
   const { user, id } = route.params;
-  const messages = useAtomValue(messagesAtom).filter(
-    (msg) => msg.conversationId === id,
-  );
+  const [allMessages, setMessages] = useAtom(messagesAtom);
+  const me = useAtomValue(userAtom);
+
+  const messages = allMessages.filter((msg) => msg.conversationId === id);
+
+  const sendMessage = (message: string) => {
+    setMessages([
+      {
+        id: allMessages.length + 1,
+        conversationId: id,
+        sentBy: me,
+        text: message,
+      },
+      ...allMessages,
+    ]);
+  };
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: user.name });
@@ -48,7 +61,7 @@ const Conversation = ({
           keyExtractor={({ id }) => id.toString()}
         />
       </Box>
-      <ConversationBottomBox />
+      <ConversationBottomBox sendMessage={sendMessage} />
     </Box>
   );
 };

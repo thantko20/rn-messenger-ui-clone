@@ -1,8 +1,9 @@
 import { atom } from 'jotai';
 import { generateRandomWords } from '../utils';
 import { User } from '../types/users.types';
+import { Conversation } from '../types/conversation.types';
 
-export const usersAtom = atom([
+const users: User[] = [
   {
     id: 1,
     name: 'Martin',
@@ -15,25 +16,25 @@ export const usersAtom = atom([
     avatar: require('../../assets/profile_pics/2.jpg'),
     isOnline: true,
   },
-]);
+];
 
-export const userAtom = atom({
+const conversations: Conversation[] = users.map((u) => ({ id: u.id, user: u }));
+
+const me = {
   id: 99,
   name: 'John Doe',
   avatar: require('../../assets/avatar.jpg'),
   isOnline: true,
-});
+};
 
-export const conversationsAtom = atom((get) => {
-  const users = get(usersAtom);
-  return users.map((u) => ({ id: u.id, user: u }));
-});
+export const usersAtom = atom(users);
 
-export const messagesAtom = atom((get) => {
-  const users = get(usersAtom);
-  const me = get(userAtom);
+export const userAtom = atom(me);
 
-  return Array.from(Array(50)).map((_, idx) => {
+export const conversationsAtom = atom(conversations);
+
+export const messagesAtom = atom(
+  Array.from(Array(50)).map((_, idx) => {
     const randomUser = users[Math.floor(Math.random() * users.length)];
     return {
       id: idx + 1,
@@ -41,5 +42,5 @@ export const messagesAtom = atom((get) => {
       sentBy: Math.random() > 0.5 ? randomUser : me,
       conversationId: randomUser.id,
     };
-  });
-});
+  }),
+);
